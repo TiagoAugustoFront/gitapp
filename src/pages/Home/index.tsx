@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthSelected } from "../../context/auth";
 import { getRepository } from "../../services/get"
+import { Sort } from "../../utils/sort";
 import { Card, CardTitle, Container, Content, ContentCard, ContentChebox, ContentCheboxOrder, ContentOrder, Header, Input, TextLanguage } from "./style"
 
 export const Home =()=>{
@@ -27,10 +28,6 @@ export const Home =()=>{
         }else{
             toast(error)
         }
-    }
-
-    const SortRepo=(a:string,b:string)=>{
-        return a.localeCompare(b)
     }
 
     const FilterRepo=(search:string,archique?:boolean)=>{
@@ -87,17 +84,15 @@ export const Home =()=>{
                         <h3>ordenar por:</h3>
                         <ContentCheboxOrder>
                             <select onChange={(e)=>{
-                                console.log(e.currentTarget.value)
+                                let value:IRepository[] = []
                                 if (e.currentTarget.value === "alfabetica"){
-                                    let value:IRepository[] = []
-                                    repositoryFilter.sort((a,b)=>SortRepo(a.name,b.name)).map(x=>value.push(x))
-                                    return setRepositoryFilter(value)
+                                    repositoryFilter.sort((repo1,repo2)=>Sort(repo1.name,repo2.name)).map(x=>value.push(x))
                                 }
                                 if (e.currentTarget.value === "commit") {
-                                    let value:IRepository[] = []
-                                    repositoryFilter.sort((a,b)=>SortRepo(a.updated_at,b.updated_at)).reverse().map(x=>value.push(x))
-                                    return setRepositoryFilter(value)
+                                    repositoryFilter.sort((repo1,repo2)=>Sort(repo1.pushed_at,repo2.pushed_at)).reverse().map(x=>value.push(x))
+                                    
                                 }
+                                return setRepositoryFilter(value)
                             }}>
                                 <option value="alfabetica">A-Z</option>
                                 <option value="commit">commit</option>
