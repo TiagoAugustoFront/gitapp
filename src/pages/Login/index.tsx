@@ -16,7 +16,7 @@ export const Login =()=>{
             console.log(data.data)
             history('/home')
         }else{
-            return toast.error("Nome de usuario invalido!")
+            alert("Nome de usuario invalido!")
         }
     }
     
