@@ -2,7 +2,6 @@ import { useState } from "react"
 import { getUser } from "../../services/get"
 import { Button, Container, Content, ContentInput, Input, Label, Title } from "./style"
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useAuth, useAuthSelected } from "../../context/auth";
 
 export const Login =()=>{

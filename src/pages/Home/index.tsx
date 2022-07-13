@@ -31,7 +31,7 @@ export const Home =()=>{
     }
 
     const FilterRepo=(search:string,archique?:boolean)=>{
-        if(search == undefined || search == null || search == ""){
+        if(search === undefined || search === null || search === ""){
             console.log("aqui")
             setRepositoryFilter(repository)
         }else{
